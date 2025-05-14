@@ -2,8 +2,8 @@
 Your project's description...
 
 ## Environments
-- Preview: https://main--{repo}--{owner}.aem.page/
-- Live: https://main--{repo}--{owner}.aem.live/
+- Preview: https://main--eds-test-boilerplate--gauthamksn.aem.page/
+- Live: https://main--eds-test-boilerplate--gauthamksn.aem.live/
 
 ## Documentation
 
