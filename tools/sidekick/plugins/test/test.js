@@ -1,12 +1,12 @@
 
 export async function decorate(container, data, query) {
-    const container = `<sp-split-view primary-size="350" dir="ltr" resizable="" splitter-pos="350">
+    const myInner = `<sp-split-view primary-size="350" dir="ltr" resizable="" splitter-pos="350">
       <div class="menu"><sp-button>Try me</sp-button></div>>
       <div class="content"><sp-button>Test Infos</sp-button></div>
 </sp-split-view>`
 
     console.log('test plugin loaded', data, query);
-    container.innerHTML = container;
+    container.innerHTML = myInner;
 }
 
 export default {
