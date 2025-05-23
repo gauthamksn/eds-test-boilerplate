@@ -7,3 +7,7 @@ helix-importer-ui
 .DS_Store
 *.bak
 .idea
+
+tools/visual-testing/baseline
+tools/visual-testing/current
+tools/visual-testing/diff

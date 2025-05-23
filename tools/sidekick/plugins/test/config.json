@@ -1,0 +1,32 @@
+{
+  "defaultBaselineUrl": "https://main--eds-test-boilerplate--gauthamksn.aem.page",
+  "defaultCurrentUrl": "http://localhost:3000",
+  "threshold": 0.1,
+  "defaultViewport": {
+    "width": 1280,
+    "height": 800,
+    "deviceScaleFactor": 1
+  },
+  "breakpoints": [
+    {
+      "name": "Mobile",
+      "width": 375,
+      "height": 667,
+      "deviceScaleFactor": 2
+    },
+    {
+      "name": "Tablet",
+      "width": 768,
+      "height": 1024,
+      "deviceScaleFactor": 1
+    },
+    {
+      "name": "Desktop",
+      "width": 1280,
+      "height": 800,
+      "deviceScaleFactor": 1
+    }
+  ],
+  "timeout": 3000,
+  "waitForSelector": 1000
+}

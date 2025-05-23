@@ -1,4 +1,4 @@
-  {
+{
     "project": "EDS Test Boilerplate",
     "plugins": [
       {
@@ -7,6 +7,14 @@
         "environments": ["edit"],
         "url": "/tools/sidekick/library.html",
         "includePaths": ["**.docx**"]
+      },
+      {
+        "id": "test",
+        "title": "Visual Tests",
+        "environments": ["dev", "preview", "live"],
+        "url": "/tools/sidekick/plugins/test/test.js",
+        "isPalette": true,
+        "paletteRect": "top: 50px; left: 15px; bottom: 15px; right: 15px; width: calc(100% - 30px); height: calc(100% - 65px);"
       }
     ]
   }
