@@ -18,6 +18,9 @@ export function createTestForm(data, config, onSubmit) {
   // Create breakpoint selection
   const breakpointSelectionGroup = createBreakpointSelection(config);
   
+  // Create fetch baseline option
+  const fetchBaselineGroup = createFetchBaselineOption();
+  
   // Create block selection
   const blockSelectionGroup = createBlockSelection(data);
   
@@ -34,6 +37,7 @@ export function createTestForm(data, config, onSubmit) {
     const formData = new FormData(form);
     const baselineUrl = formData.get('baselineUrl');
     const currentUrl = formData.get('currentUrl');
+    const fetchBaselineIfMissing = formData.get('fetchBaselineIfMissing') === 'on';
     
     // Get selected breakpoints
     const selectedBreakpoints = Array.from(
@@ -72,7 +76,8 @@ export function createTestForm(data, config, onSubmit) {
       baselineUrl,
       currentUrl,
       selectedBlocks,
-      selectedBreakpoints
+      selectedBreakpoints,
+      fetchBaselineIfMissing
     });
   });
   
@@ -80,6 +85,7 @@ export function createTestForm(data, config, onSubmit) {
   form.appendChild(baselineUrlGroup);
   form.appendChild(currentUrlGroup);
   form.appendChild(breakpointSelectionGroup);
+  form.appendChild(fetchBaselineGroup);
   form.appendChild(blockSelectionGroup);
   form.appendChild(submitButton);
   
@@ -135,6 +141,34 @@ function createCurrentUrlInput(config) {
   currentUrlGroup.appendChild(currentUrlInput);
   
   return currentUrlGroup;
+}
+
+/**
+ * Create fetch baseline option
+ * @returns {HTMLElement} - Form group element
+ */
+function createFetchBaselineOption() {
+  const fetchBaselineGroup = document.createElement('div');
+  fetchBaselineGroup.className = 'form-group';
+  
+  const fetchBaselineOption = document.createElement('div');
+  fetchBaselineOption.className = 'fetch-baseline-option';
+  
+  const checkbox = document.createElement('input');
+  checkbox.type = 'checkbox';
+  checkbox.id = 'fetch-baseline-if-missing';
+  checkbox.name = 'fetchBaselineIfMissing';
+  checkbox.checked = false; // Default to unchecked
+  
+  const label = document.createElement('label');
+  label.setAttribute('for', 'fetch-baseline-if-missing');
+  label.textContent = 'Fetch baseline images only if missing';
+  
+  fetchBaselineOption.appendChild(checkbox);
+  fetchBaselineOption.appendChild(label);
+  fetchBaselineGroup.appendChild(fetchBaselineOption);
+  
+  return fetchBaselineGroup;
 }
 
 /**

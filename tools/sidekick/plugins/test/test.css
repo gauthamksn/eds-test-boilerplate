@@ -69,16 +69,24 @@
 }
 
 .breakpoint-option,
-.block-option {
+.block-option,
+.fetch-baseline-option {
   display: flex;
   margin-bottom: 8px;
 }
 
 .breakpoint-option label,
-.block-option label {
+.block-option label,
+.fetch-baseline-option label {
   margin-left: 8px;
   font-weight: normal;
   margin-top: 5px;
+}
+
+.fetch-baseline-option {
+  padding: 8px;
+  border-radius: 4px;
+  margin-bottom: 16px;
 }
 
 /* Breakpoint tabs */

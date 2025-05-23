@@ -155,7 +155,7 @@ app.post('/api/visual-tests/run', async (req, res) => {
   try {
     console.log('Received request body:', req.body);
     
-    const { baselineUrl, currentUrl, selectedBlocks, selectedBreakpoints } = req.body;
+    const { baselineUrl, currentUrl, selectedBlocks, selectedBreakpoints, fetchBaselineIfMissing = true } = req.body;
     const config = await loadConfig();
     
     // Use selected breakpoints or default viewport
@@ -261,12 +261,14 @@ app.post('/api/visual-tests/run', async (req, res) => {
       try {
         // Capture screenshots
         
-        // Capture baseline screenshot
-        if (baselineUrl) {
-          // Create file path with breakpoint info
-          const breakpointSuffix = breakpoint.name ? `-${breakpoint.name.toLowerCase()}` : '';
-          const baselineFilePath = path.join(blockBaselinePath, `${block.name}${breakpointSuffix}.png`);
-          
+        // Create file path with breakpoint info
+        const breakpointSuffix = breakpoint.name ? `-${breakpoint.name.toLowerCase()}` : '';
+        const baselineFilePath = path.join(blockBaselinePath, `${block.name}${breakpointSuffix}.png`);
+        
+        // Capture baseline screenshot only if it doesn't exist or fetchBaselineIfMissing is false
+        const baselineExists = await fs.pathExists(baselineFilePath);
+        if (baselineUrl && (!baselineExists || fetchBaselineIfMissing === false)) {
+          console.log(`Capturing baseline for ${block.name} at ${breakpoint.name || 'default'} breakpoint`);
           await captureScreenshot(
             browser,
             baselineBlockUrl,
@@ -280,6 +282,8 @@ app.post('/api/visual-tests/run', async (req, res) => {
               waitForSelector: config.waitForSelector || 10000
             }
           );
+        } else {
+          console.log(`Using existing baseline for ${block.name} at ${breakpoint.name || 'default'} breakpoint`);
         }
         
         // Capture current screenshot
