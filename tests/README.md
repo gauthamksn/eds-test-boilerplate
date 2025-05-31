@@ -21,7 +21,22 @@ Before running the tests, ensure that:
 
 Before running the tests, make sure the AEM server is running and the sidekick library is accessible.
 
-To run the visual tests, you can use the npm scripts:
+#### Generating Tests
+
+The framework includes a test generator that fetches components from the library.json endpoint and generates individual tests for each component:
+
+```bash
+npm run test:visual:generate
+```
+
+This will:
+1. Fetch components from the library.json endpoint
+2. Generate the visual.spec.ts file with individual tests for each component
+3. Use fallback components if the endpoint is not accessible
+
+#### Running Tests
+
+To run the visual tests (this will also generate the tests first):
 
 ```bash
 npm run test:visual
@@ -33,7 +48,7 @@ To update baseline screenshots:
 npm run test:visual:update
 ```
 
-Or you can use the Playwright commands directly:
+Or you can use the Playwright commands directly (after generating tests):
 
 ```bash
 npx playwright test --config=tests/playwright.config.js
